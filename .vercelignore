@@ -1,0 +1,15 @@
+# 1) Cartelle di tool/local
+.config/
+
+# 2) Script SQL e shell
+migrations/
+functions_for_supabase.sql
+update_logger.sh
+
+# 3) Build artifacts / dipendenze
+node_modules/
+dist/
+
+# 4) File temporanei / log
+*.log
+*.tar.gz
