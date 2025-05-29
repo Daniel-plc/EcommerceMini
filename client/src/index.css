@@ -1,0 +1,527 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Codice prodotto nell'immagine */
+.product-code-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 2px 6px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+}
+
+@layer base {
+  * {
+    @apply border-slate-200 box-border;
+  }
+
+  html,
+  body {
+    @apply h-full m-0 p-0;
+  }
+
+  body {
+    @apply font-sans antialiased bg-slate-50 text-slate-900 overflow-x-hidden text-base;
+  }
+
+  /* Nasconde le frecce input number nei browser Webkit (Chrome, Safari, Edge) */
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Nasconde le frecce input number in Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  /* Card prodotto moderna in stile e-commerce */
+  .product-card {
+    @apply bg-white border border-slate-100 shadow-sm hover:shadow-md transition-all duration-200 rounded-lg overflow-hidden;
+    /* Previeni salti di layout con altezza minima */
+    min-height: 22rem; /* Altezza minima per la card su mobile */
+  }
+
+  /* Layout card rettangolare */
+  .product-card-wrapper {
+    @apply flex flex-col md:flex-row h-full;
+  }
+  
+  /* Imposta altezza auto per desktop dove non è necessaria un'altezza fissa */
+  @media (min-width: 768px) {
+    .product-card {
+      min-height: auto;
+    }
+  }
+
+  /* Sezione immagine */
+  .product-card-image-section {
+    @apply relative md:w-1/3 aspect-square md:aspect-auto md:h-full flex items-center justify-center;
+  }
+
+  .product-card-image {
+    @apply w-full h-full object-cover cursor-pointer transition-all duration-300 hover:brightness-105;
+  }
+
+  .product-card-zoom {
+    @apply absolute bottom-2 right-2 bg-white/90 text-slate-700 p-1.5 rounded-full shadow-sm hover:bg-white hover:text-primary transition-colors duration-200;
+  }
+
+  /* Sezione contenuto */
+  .product-card-content {
+    @apply p-4 flex flex-col md:w-2/3 justify-between;
+  }
+
+  .product-card-title {
+    @apply text-lg font-semibold text-slate-900 break-words hyphens-auto;
+  }
+
+  .product-card-description {
+    @apply text-xs text-slate-500 line-clamp-2 mb-3;
+  }
+
+  /* Opzioni prodotto */
+  .product-options {
+    @apply space-y-2.5;
+    /* Altezza minima per prevenire variazioni di layout su mobile */
+    min-height: 9.5rem; /* Altezza minima per contenere 3 opzioni e impedire il jump */
+  }
+
+  /* Media query per schermi più grandi dove il problema non si verifica */
+  @media (min-width: 768px) {
+    .product-options {
+      min-height: unset; /* Rimuovi l'altezza minima su desktop */
+    }
+  }
+
+  .product-option {
+    @apply relative;
+    margin-bottom: 0.75rem; /* Margine consistente sotto ogni opzione */
+  }
+
+  .product-option-row {
+    @apply flex justify-between items-baseline mb-1;
+  }
+
+  .product-option-label {
+    @apply text-sm font-medium text-slate-700 flex items-center overflow-hidden text-ellipsis break-words;
+  }
+
+  .product-option-count {
+    @apply text-xs text-slate-400 whitespace-nowrap ml-1 min-w-[40px] text-right;
+  }
+
+  .product-option-required {
+    @apply text-red-500 ml-1;
+  }
+
+  .product-option-select {
+    @apply block w-full rounded-md border-slate-200 shadow-sm focus:border-primary focus:ring-1 focus:ring-primary text-sm py-1.5;
+    /* Altezza fissa per prevenire variazioni di layout su mobile */
+    min-height: 2.375rem; /* 38px, altezza standard della select */
+    background-color: white; /* Assicura un colore di sfondo coerente */
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  /* Trattamento speciale per le option - soluzione per i menu su mobile */
+  .product-option-select option {
+    padding: 5px;
+    max-width: 100%;
+    white-space: normal; /* Permette a lunghi testi di andare a capo nelle option */
+  }
+
+  .product-option-disabled {
+    @apply bg-slate-100 text-slate-500 border-slate-300;
+    cursor: not-allowed;
+    box-shadow: none; /* Rimuove l'ombra per dare un aspetto più piatto alle opzioni disabilitate */
+  }
+  
+  /* Stile specifico per l'opzione disabilitata del menu a tendina */
+  .product-option-disabled option {
+    @apply bg-slate-100 text-slate-500;
+  }
+  
+  /* Versione "plain" senza complicazioni (evita doppi lucchetti) */
+  .product-option-select-plain {
+    @apply block w-full relative p-2 h-10 rounded-md border border-slate-200 text-sm
+    appearance-none cursor-default shadow-sm;
+    /* Altezza fissa per prevenire variazioni di layout su mobile */
+    min-height: 2.5rem;
+    transition: background-color 0.15s ease-in-out;
+  }
+  
+  /* Modifica versione plain solo per schermi estremamente piccoli */
+  @media (max-width: 250px) {
+    .product-option-select-plain {
+      @apply flex items-center;
+    }
+    .product-option-select-plain span {
+      @apply text-xs;
+      max-width: calc(100% - 30px); /* Riduci per fare spazio all'icona */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: inline-block;
+      white-space: nowrap; /* Mantiene su una linea */
+    }
+  }
+  
+  /* Select in modalità sola lettura per risultati di ricerca */
+  .product-option-select-readonly {
+    @apply block w-full relative p-2 h-10 rounded-md border border-slate-200 bg-white text-sm
+    appearance-none cursor-default shadow-sm text-slate-600;
+    /* Altezza fissa per prevenire variazioni di layout su mobile anche per i campi in sola lettura */
+    min-height: 2.5rem; /* 40px, altezza standard della select readonly */
+  }
+  
+  /* Freccia a destra per simulare l'aspetto di una select */
+  .select-arrow {
+    @apply absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none text-slate-400;
+  }
+  
+  /* Stile quando ha un valore selezionato */
+  .product-option-select-readonly.has-value {
+    @apply text-slate-800;
+  }
+
+  /* Sezione quantità e pulsante - identica allo screenshot */
+  .product-actions {
+    @apply mt-3 pt-3;
+  }
+
+  /* Gruppo controllo quantità */
+  .quantity-control-group {
+    @apply flex justify-between items-center mb-1.5;
+  }
+
+  /* Etichetta quantità */
+  .quantity-label {
+    @apply text-sm font-medium text-slate-800;
+  }
+
+  /* Avviso opzioni obbligatorie */
+  .options-required-warning {
+    @apply text-xs text-amber-600 text-center mt-2 w-full font-medium;
+  }
+
+  /* ================ NUOVA STRUTTURA PRODOTTI CARD ================ */
+
+  /* Griglia di prodotti - desktop 3 colonne, tablet 2 colonne, mobile 1 colonna */
+  .products-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6;
+  }
+
+  /* Card prodotto ridisegnata completamente (già definita sopra, questa è solo un'estensione) */
+  /* Utilizziamo !important per assicurarci che queste regole abbiano la precedenza */
+
+  /* Sezione immagine e controlli prodotto */
+  .product-image-section {
+    @apply relative aspect-[4/3] overflow-hidden bg-gray-100;
+  }
+
+  /* Immagine del prodotto */
+  .product-image {
+    @apply w-full h-full object-cover transition-transform hover:scale-105;
+  }
+
+  /* Contenuto della card */
+  .product-content {
+    @apply p-4 flex-grow flex flex-col justify-between;
+  }
+
+  /* Intestazione prodotto */
+  .product-header {
+    @apply mb-3;
+  }
+
+  /* Titolo prodotto */
+  .product-title {
+    @apply text-lg font-semibold text-gray-900 line-clamp-2 break-words hyphens-auto;
+  }
+
+  /* Descrizione prodotto */
+  .product-description {
+    @apply text-sm text-gray-600 mt-1 line-clamp-3;
+  }
+
+  /* Opzioni prodotto */
+  .product-options {
+    @apply mb-4 space-y-3;
+  }
+
+  /* Opzione singola */
+  .product-option {
+    @apply mb-2;
+  }
+  
+  /* Contenitore flessibile che contiene etichetta e contatore */
+  .product-option-row {
+    @apply flex justify-between items-center mb-1;
+  }
+  
+  /* Etichetta nell'opzione prodotto */
+  .product-option-label {
+    @apply text-sm font-medium text-gray-700;
+  }
+  
+  /* Contatore delle opzioni disponibili */
+  .product-option-count {
+    @apply text-xs text-slate-500 ml-1;
+  }
+
+  /* Etichetta opzione - per compatibilità */
+  .option-label {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+  
+  /* Layout responsivo completo solo per schermi estremamente piccoli */
+  @media (max-width: 250px) {
+    /* Layout verticale per le opzioni su dispositivi mobili */
+    .product-option-row {
+      @apply flex-col items-start; /* Stack verticale per etichetta e contatore opzioni */
+    }
+    
+    /* Contatore opzioni spostato sotto all'etichetta */
+    .product-option-count {
+      @apply text-xs text-slate-500 mt-0.5 ml-0 mr-0;
+    }
+    
+    /* Le etichette prendono tutto lo spazio in larghezza */
+    .product-option-label {
+      @apply text-xs font-medium mb-1 w-full;
+      word-wrap: break-word; /* Permette alle parole lunghe di andare a capo */
+      hyphens: auto; /* Applica sillabazione quando necessario */
+    }
+    
+    /* Riduzione generale dimensione testo nelle select */
+    .product-option-select {
+      @apply text-xs py-1.5;
+    }
+    
+    /* Versione plain ottimizzata per mobile */
+    .product-option-select-plain {
+      @apply text-xs py-1.5;
+    }
+    
+    /* Ottimizzazioni per etichette quantità e altre */
+    .qty-label, 
+    .option-label {
+      @apply text-xs;
+    }
+  }
+
+  /* Footer card con controlli quantità e aggiungi */
+  .product-card-footer {
+    @apply pt-3 mt-auto;
+  }
+
+  /* ================ NUOVO SISTEMA AGGIUNGI AL CARRELLO ================ */
+
+  /* Sistema a griglia per controlli quantità e pulsante aggiungi */
+  .cart-controls-grid {
+    @apply grid grid-cols-12 gap-2;
+  }
+
+  /* Layout stack per schermi molto piccoli */
+  @media (max-width: 320px) {
+    .cart-controls-grid {
+      @apply block space-y-2 mx-0.5;
+    }
+    .product-content {
+      @apply p-3;
+    }
+  }
+
+  /* Label quantità */
+  .qty-label {
+    @apply text-sm font-medium text-gray-700 flex items-center mb-1;
+  }
+
+  /* Elimino la classe tooltip-custom ormai non utilizzata */
+
+  /* Contenitore controlli quantità */
+  .qty-control-container {
+    @apply col-span-5 flex items-center;
+  }
+
+  /* Per schermi molto piccoli, adattiamo */
+  @media (max-width: 320px) {
+    .qty-control-container {
+      @apply w-full flex justify-center;
+    }
+    .qty-stepper {
+      @apply w-auto min-w-[120px] max-w-[180px] mx-auto;
+    }
+    .qty-label {
+      @apply justify-center text-gray-800;
+    }
+  }
+
+  /* Controlli quantità semplificati */
+  .qty-stepper {
+    @apply inline-flex h-9 w-auto border border-gray-200 rounded-md overflow-hidden flex-nowrap;
+  }
+
+  /* Pulsanti - e + */
+  .qty-btn {
+    @apply h-9 w-9 flex items-center justify-center bg-white text-gray-600 border-0 hover:bg-gray-50 text-lg font-bold overflow-visible;
+  }
+
+  /* Riduzione dimensione pulsanti su schermi molto piccoli */
+  @media (max-width: 320px) {
+    .qty-btn {
+      @apply w-11 flex-shrink-0 text-gray-800 hover:bg-gray-100;
+    }
+  }
+  
+  /* Migliore contrasto per schermi estremamente piccoli */
+  @media (max-width: 280px) {
+    .qty-btn {
+      @apply bg-gray-50 text-gray-800;
+    }
+    .qty-stepper {
+      @apply mx-0.5;
+    }
+  }
+
+  /* Input quantità */
+  .qty-input {
+    @apply h-9 w-10 border-x border-gray-200 bg-white text-center text-sm focus:ring-0 focus:outline-none p-0;
+  }
+
+  /* Adattamento per schermi estremamente piccoli */
+  @media (max-width: 250px) {
+    .qty-input {
+      @apply w-8;
+    }
+    
+    /* Adattamento input quantity */
+  }
+
+  /* Adattamento per schermi molto piccoli */
+  @media (max-width: 320px) {
+    .qty-input {
+      @apply flex-1 min-w-[30px];
+    }
+    
+    /* Adattamenti per input quantity */
+  }
+
+  
+  /* Adattamento estremo */
+  @media (max-width: 280px) {
+    .option-label {
+      @apply text-xs; /* Testo più piccolo per etichette */
+    }
+    .product-option {
+      @apply mb-1.5; /* Meno spazio tra le opzioni */
+    }
+    .product-options {
+      @apply mb-3 space-y-2; /* Meno spazio per le opzioni */
+    }
+    .qty-label {
+      @apply text-xs mb-0.5; /* Etichetta quantità più piccola */
+    }
+    .card-body {
+      @apply p-3; /* Meno padding nelle card */
+    }
+    
+    /* Adattamenti estremi per schermi piccoli */
+  }
+
+  /* Contenitore pulsante aggiungi */
+  .add-btn-container {
+    @apply col-span-7;
+  }
+
+  /* Per schermi molto piccoli, pulsante a larghezza piena */
+  @media (max-width: 320px) {
+    .add-btn-container {
+      @apply w-full;
+    }
+  }
+
+  /* Pulsante aggiungi al carrello */
+  .cart-add-btn {
+    @apply h-9 w-full bg-slate-600 text-white rounded-md text-sm font-medium flex items-center justify-center gap-1 hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Stile specifico per pulsanti disabilitati nella ricerca */
+  .disabled-btn {
+    @apply bg-slate-300 hover:bg-slate-300 cursor-not-allowed opacity-70;
+  }
+
+  /* Icona carrello */
+  .cart-btn-icon {
+    @apply w-4 h-4 flex-shrink-0;
+  }
+
+  /* Messaggio opzioni obbligatorie */
+  .options-msg {
+    @apply text-xs text-amber-600 text-center mt-2;
+  }
+
+  /* Per schermi extra small - mostro solo l'icona */
+  @media (max-width: 359px) {
+    .cart-btn-text {
+      @apply hidden;
+    }
+    .cart-btn-icon {
+      @apply w-5 h-5; /* Icona più grande su schermi piccoli */
+    }
+  }
+
+  /* Per schermi standard - mostro testo completo */
+  @media (min-width: 360px) {
+    .cart-add-btn {
+      @apply gap-2;
+    }
+  }
+}
+
+@layer components {
+  .container {
+    @apply px-4 sm:px-6 md:px-8 lg:px-12 mx-auto w-full;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-sm overflow-hidden flex flex-col h-full;
+  }
+
+  .card-image {
+    @apply h-48 sm:h-52 md:h-56 relative overflow-hidden;
+  }
+
+  .card-body {
+    @apply p-4 flex-grow flex flex-col;
+  }
+  
+  /* Modifica margini card per schermi molto piccoli */
+  @media (max-width: 320px) {
+    .card-body {
+      @apply px-3 py-3;
+    }
+  }
+
+  .form-group {
+    @apply mb-4 w-full sm:w-full md:w-full lg:w-2/3 xl:w-1/2;
+  }
+  
+  /* Nasconde la scrollbar ma mantiene la funzionalità di scorrimento */
+  .no-scrollbar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}

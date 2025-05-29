@@ -1,0 +1,148 @@
+2025-05-20 15:10:44,957 - semgrep.notifications - WARNING - METRICS: Using configs from the Registry (like --config=p/ci) reports pseudonymous rule metrics to semgrep.dev.
+To disable Registry rule metrics, use "--metrics=off".
+Using configs only from local files (like --config=xyz.yml) does not enable metrics.
+
+More information: https://semgrep.dev/docs/metrics
+
+2025-05-20 15:10:44,958 - semgrep.run_scan - DEBUG - semgrep version 1.2.0
+2025-05-20 15:10:44,965 - semgrep.git - DEBUG - Failed to get project url from 'git ls-remote': Command failed with exit code: 128
+-----
+Command failed with output:
+fatal: No remote configured to list refs from.
+
+
+Failed to run 'git ls-remote --get-url'. Possible reasons:
+
+- the git binary is not available
+- the current working directory is not a git repository
+- the baseline commit is not a parent of the current commit
+    (if you are running through semgrep-app, check if you are setting `SEMGREP_BRANCH` or `SEMGREP_BASELINE_COMMIT` properly)
+- the current working directory is not marked as safe
+    (fix with `git config --global --add safe.directory $(pwd)`)
+
+Try running the command yourself to debug the issue.
+2025-05-20 15:10:44,967 - semgrep.config_resolver - DEBUG - Loading local config from /home/runner/workspace/.config/.semgrep/semgrep_rules.json
+2025-05-20 15:10:44,969 - semgrep.config_resolver - DEBUG - Done loading local config from /home/runner/workspace/.config/.semgrep/semgrep_rules.json
+2025-05-20 15:10:44,972 - semgrep.config_resolver - DEBUG - Saving rules to /tmp/semgrep-yi7160w8.rules
+2025-05-20 15:10:45,146 - semgrep.semgrep_core - DEBUG - Failed to open resource semgrep-core-proprietary: [Errno 2] No such file or directory: '/tmp/_MEI3P1gnp/semgrep/bin/semgrep-core-proprietary'.
+2025-05-20 15:10:45,699 - semgrep.rule_lang - DEBUG - semgrep-core validation response: valid=True
+2025-05-20 15:10:45,699 - semgrep.rule_lang - DEBUG - semgrep-core validation succeeded
+2025-05-20 15:10:45,699 - semgrep.rule_lang - DEBUG - RPC validation succeeded
+2025-05-20 15:10:45,700 - semgrep.config_resolver - DEBUG - loaded 1 configs in 0.7333834171295166
+2025-05-20 15:10:45,785 - semgrep.run_scan - VERBOSE - running 711 rules from 1 config /home/runner/workspace/.config/.semgrep/semgrep_rules.json_0
+2025-05-20 15:10:45,785 - semgrep.run_scan - VERBOSE - No .semgrepignore found. Using default .semgrepignore rules. See the docs for the list of default ignores: https://semgrep.dev/docs/cli-usage/#ignore-files
+2025-05-20 15:10:45,787 - semgrep.run_scan - VERBOSE - Rules:
+2025-05-20 15:10:45,787 - semgrep.run_scan - VERBOSE - <SKIPPED DATA (too many entries; use --max-log-list-entries)>
+2025-05-20 15:10:46,704 - semgrep.core_runner - DEBUG - Passing whole rules directly to semgrep_core
+2025-05-20 15:10:47,012 - semgrep.core_runner - DEBUG - Running Semgrep engine with command:
+2025-05-20 15:10:47,012 - semgrep.core_runner - DEBUG - /tmp/_MEI3P1gnp/semgrep/bin/opengrep-core -json -rules /tmp/tmpv2g3gq1e.json -j 8 -targets /tmp/tmppcihl355 -timeout 5 -timeout_threshold 3 -max_memory 0 -fast
+2025-05-20 15:11:04,911 - semgrep.core_runner - DEBUG - --- semgrep-core stderr ---
+[00.09][[34mINFO[0m]: Executed as: /tmp/_MEI3P1gnp/semgrep/bin/opengrep-core -json -rules /tmp/tmpv2g3gq1e.json -j 8 -targets /tmp/tmppcihl355 -timeout 5 -timeout_threshold 3 -max_memory 0 -fast
+[00.09][[34mINFO[0m]: Version: 1.2.0
+[00.09][[34mINFO[0m]: Parsing rules in /tmp/tmpv2g3gq1e.json
+[00.63][[34mINFO[0m]: scan: processing 579 files (skipping 0), with 454 rules (skipping 0 )
+[02.76][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.browser.security.raw-html-concat file: client/src/pages/ResetPassword.tsx func: ResetPassword:216]
+[0m[03.66][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.path-traversal.path-join-resolve-traversal file: client/src/pages/Products.tsx func: Products:8766]
+[0m[03.94][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.unsafe-formatstring file: client/src/pages/Products.tsx func: Products:8766]
+[0m[04.57][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.detect-non-literal-require file: client/src/pages/Products.tsx func: Products:8766]
+[0m[06.55][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.express.security.injection.tainted-sql-string file: client/src/pages/Products.tsx func: Products:8766]
+[0m[08.73][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.path-traversal.path-join-resolve-traversal file: attached_assets/OrderForm.tsx func: ???]
+[0m[09.02][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.unsafe-formatstring file: attached_assets/OrderForm.tsx func: ???]
+[0m[09.19][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.express.security.injection.raw-html-format file: client/src/pages/Products.tsx func: Products:8766]
+[0m[09.19][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.express.security.injection.raw-html-format file: client/src/pages/Products.tsx func: Products:8766]
+[0m[09.39][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.detect-non-literal-require file: attached_assets/OrderForm.tsx func: ???]
+[0m[09.55][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.detect-non-literal-require file: attached_assets/OrderForm.tsx func: ???]
+[0m[09.70][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.express.security.audit.res-render-injection file: client/src/pages/Products.tsx func: Products:8766]
+[0m[10.26][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.detect-non-literal-require file: client/src/lib/image-cache.ts func: ???]
+[0m[10.39][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.detect-non-literal-require file: client/src/lib/image-cache.ts func: ???]
+[0m[10.59][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.express.security.audit.remote-property-injection file: client/src/pages/Products.tsx func: Products:8766]
+[0m[12.00][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.express.security.cors-misconfiguration file: client/src/components/ui/navbar.tsx func: ???]
+[0m[12.11][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.express.security.cors-misconfiguration file: client/src/components/ui/navbar.tsx func: ???]
+[0m[12.99][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.path-traversal.path-join-resolve-traversal file: client/src/components/ui/product-card.tsx func: ???]
+[0m[13.21][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.path-traversal.path-join-resolve-traversal file: client/src/components/ui/product-card.tsx func: ???]
+[0m[13.29][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.path-traversal.path-join-resolve-traversal file: client/src/components/ui/product-card.tsx func: ???]
+[0m[13.46][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.path-traversal.path-join-resolve-traversal file: client/src/pages/OrderHistory.tsx func: ???]
+[0m[13.69][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.express.security.audit.express-ssrf file: client/src/pages/Products.tsx func: Products:8766]
+[0m[13.81][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.detect-non-literal-require file: client/src/components/ui/product-card.tsx func: ???]
+[0m[14.01][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.unsafe-formatstring file: client/src/pages/OrderHistory.tsx func: ???]
+[0m[14.02][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.detect-non-literal-require file: client/src/components/ui/product-card.tsx func: ???]
+[0m[14.14][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.express.security.audit.express-path-join-resolve-traversal file: client/src/pages/Products.tsx func: Products:8766]
+[0m[14.23][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.unsafe-formatstring file: client/src/pages/OrderHistory.tsx func: ???]
+[0m[14.50][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.detect-non-literal-require file: client/src/pages/OrderHistory.tsx func: ???]
+[0m[14.51][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.detect-non-literal-require file: client/src/lib/supabase.ts func: ???]
+[0m[14.66][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.detect-non-literal-require file: client/src/lib/supabase.ts func: ???]
+[0m[14.67][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.path-traversal.path-join-resolve-traversal file: client/src/pages/OrderForm.tsx func: ???]
+[0m[14.72][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.detect-non-literal-require file: client/src/pages/OrderHistory.tsx func: ???]
+[0m[14.78][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.express.security.x-frame-options-misconfiguration file: client/src/pages/Products.tsx func: Products:8766]
+[0m[15.05][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.unsafe-formatstring file: client/src/pages/OrderForm.tsx func: ???]
+[0m[15.07][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.express.security.require-request file: client/src/pages/Products.tsx func: Products:8766]
+[0m[15.24][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.unsafe-formatstring file: client/src/pages/OrderForm.tsx func: ???]
+[0m[15.43][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.detect-non-literal-require file: client/src/pages/OrderForm.tsx func: ???]
+[0m[15.60][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.detect-non-literal-require file: client/src/pages/OrderForm.tsx func: ???]
+[0m[15.83][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.unsafe-formatstring file: client/src/lib/pdf.ts func: generateOrderPDFInternal:61538]
+[0m[15.87][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.express.security.express-insecure-template-usage file: client/src/pages/Products.tsx func: Products:8766]
+[0m[16.16][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.express.security.cors-misconfiguration file: client/src/pages/Products.tsx func: Products:8766]
+[0m[16.47][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.browser.security.js-open-redirect-from-function file: client/src/pages/Products.tsx func: Products:8766]
+[0m[16.48][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.detect-non-literal-fs-filename file: client/src/pages/OrderHistory.tsx func: ???]
+[0m[16.78][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.browser.security.raw-html-concat file: client/src/pages/Products.tsx func: Products:8766]
+[0m[16.84][[33mWARNING[0m]: Fixpoint timeout while performing taint analysis [rule: config..semgrep.vendored-rules.javascript.lang.security.audit.detect-non-literal-fs-filename file: client/src/pages/OrderForm.tsx func: ???]
+[0m[17.85][[34mINFO[0m]: Custom ignore pattern: None
+[17.85][[34mINFO[0m]: Custom ignore pattern: None
+--- end semgrep-core stderr ---
+2025-05-20 15:11:04,999 - semgrep.core_runner - DEBUG - semgrep ran in 0:00:18.295922 on 234 files
+2025-05-20 15:11:05,001 - semgrep.core_runner - DEBUG - findings summary: 0 warning, 0 error, 0 info
+2025-05-20 15:11:05,004 - semgrep.app.auth - DEBUG - Getting API token from settings file
+2025-05-20 15:11:05,004 - semgrep.app.auth - DEBUG - No API token found in settings file
+2025-05-20 15:11:05,004 - semgrep.semgrep_core - DEBUG - Failed to open resource semgrep-core-proprietary: [Errno 2] No such file or directory: '/tmp/_MEI3P1gnp/semgrep/bin/semgrep-core-proprietary'.
+2025-05-20 15:11:05,115 - semgrep.output - VERBOSE - 
+========================================
+Files skipped:
+========================================
+
+  Always skipped by Opengrep:
+
+   • <none>
+
+  Skipped by .gitignore:
+  (Disable by passing --no-git-ignore)
+
+   • <all files not listed by `git ls-files` were skipped>
+
+  Skipped by .semgrepignore:
+  - https://semgrep.dev/docs/ignoring-files-folders-code/#understand-semgrep-defaults
+
+   • <none>
+
+  Skipped by --include patterns:
+
+   • <none>
+
+  Skipped by --exclude patterns:
+
+   • <none>
+
+  Files skipped due to insufficient read permissions:
+
+   • <none>
+
+  Skipped by limiting to files smaller than 1000000 bytes:
+  (Adjust with the --max-target-bytes flag)
+
+   • attached_assets/EcommerceMini (1).zip
+   • attached_assets/EcommerceMini.zip
+   • attached_assets/Ordini App.jpeg.png
+
+  Partially analyzed due to parsing or internal Opengrep errors
+
+   • tailwind.config.ts (1 lines skipped)
+
+2025-05-20 15:11:05,116 - semgrep.output - INFO - Some files were skipped or only partially analyzed.
+  Scan was limited to files tracked by git.
+  Partially scanned: 1 files only partially analyzed due to parsing or internal Opengrep errors
+  Scan skipped: 3 files larger than 1.0 MB
+  For a full list of skipped files, run opengrep with the --verbose flag.
+
+Ran 435 rules on 234 files: 0 findings.
+2025-05-20 15:11:05,117 - semgrep.app.version - DEBUG - Version cache does not exist
+2025-05-20 15:11:05,117 - semgrep.app.version - DEBUG - Version cache does not exist
+2025-05-20 15:11:05,133 - semgrep.metrics - VERBOSE - Not sending pseudonymous metrics since metrics are configured to OFF and registry usage is False
