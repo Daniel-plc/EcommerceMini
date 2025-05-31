@@ -1,13 +1,14 @@
+// api/index.ts
 import express, { Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 
 const app = express();
 
-// JSON body parsing
+// 1) Parsing JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// semplice logging di tutte le API
+// 2) Logging semplice di ogni chiamata /api
 app.use((req, res, next) => {
   const start = Date.now();
   const oldJson = res.json;
@@ -29,15 +30,16 @@ app.use((req, res, next) => {
   next();
 });
 
-// qui registriamo le nostre rotte
+// 3) Registra le rotte (health, products, user…)
 registerRoutes(app);
 
-// gestione degli errori
+// 4) Middleware di gestione errori
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   const status = err.status || err.statusCode || 500;
   res.status(status).json({ message: err.message || "Internal Server Error" });
 });
 
-// **NON** facciamo mai `app.listen()` qui: Vercel lo gestisce per noi
+// 5) NON chiamare app.listen(): Vercel lo fa per te
 export default app;
+
 
