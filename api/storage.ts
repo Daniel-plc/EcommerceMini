@@ -1,5 +1,5 @@
-import { type User, type InsertUser } from "@shared/schema";
-import { supabase } from "./supabase";
+import { type User, type InsertUser } from "../shared/schema";
+import { supabase } from "./supabase.ts";
 
 // Interfaccia per operazioni CRUD
 export interface IStorage {
